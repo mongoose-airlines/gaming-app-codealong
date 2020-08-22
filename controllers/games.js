@@ -6,7 +6,15 @@ module.exports = {
   search,
   show,
   addToCollection,
-  removeFromCollection
+  removeFromCollection,
+  index
+}
+
+function index(req, res) {
+  Game.find({ "favoritedBy": req.user._id })
+  .then(games => {
+    res.render('games/index', { title: 'Game Collection', user: req.user, games})
+  })
 }
 
 function removeFromCollection(req, res) {
