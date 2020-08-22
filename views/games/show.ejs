@@ -1,19 +1,22 @@
 <%- include('../partials/header') %>
-
 <h3>Game Details Page</h3>
 <% if (game.clip) { %>
   <video width="480" height="320" controls="controls">
     <source src="<%= game.clip.clips.full %>" type="video/mp4">
-  </video>
-<% } %>
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title"><%= game.name %> </h5>
-    <p class="card-text">Released: <%= game.released %></p>
-    <p>Platforms:</p>
-    <% game.platforms.forEach(p => { %>
-      <p class="card-text"><%= p.platform.name %></p>
-    <% }) %>
+    </video>
+    <% } %>
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title"><%= game.name %> </h5>
+        <p class="card-text">Released: <%= game.released %></p>
+        <p>Platforms:</p>
+        <% game.platforms.forEach(p => { %>
+          <p class="card-text"><%= p.platform.name %></p>
+        <% }) %>
+        <p>Favorited By:</p>
+        <% favoritedBy.forEach(user => { %>
+          <p><%= user.name %></p>
+        <% }) %>
     <p class="card-text">Metacritic Score: <%= game.metacritic ? game.metacritic : 'N/A' %></p>
     <form action="/games/<%= game.slug %>/collection" method="POST">
       <input type="text" hidden name="title" value="<%= game.name %>">
@@ -23,7 +26,8 @@
       <input type="text" hidden name="imageUrl" value="<%= game.background_image %>">
       <input type="number" hidden name="rawgId" value="<%= game.id %>">
       <input type="text" hidden name="slug" value="<%= game.slug %>">
-      <button class="btn btn-warning">Add to Collection</button>
+      <button class="btn btn-warning"><%= favoritedBy.some(u => {return u.email === user.email}) ? "Remove from Collection" : "Add to Collection" %></button>
+      
     </form>
   </div>
 </div>

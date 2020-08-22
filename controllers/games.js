@@ -9,13 +9,10 @@ module.exports = {
 }
 
 function addToCollection(req, res) {
-  console.log(req.body)
   req.body.favoritedBy = req.user._id
   Game.findOne({ slug: req.body.slug })
   .then(game => {
-    if (game.length != 0) {
-      console.log(game)
-      console.log(req.user._id)
+    if (game != null) {
       game.favoritedBy.push(req.user._id)
       game.save()
       .then(() => {
@@ -43,6 +40,15 @@ function search(req, res) {
 function show(req, res) {
   axios.get(`https://api.rawg.io/api/games/${req.params.title}`)
   .then(response => {
-    res.render('games/show', { title: 'Game Details', user: req.user, game: response.data })
+    Game.findOne({ slug: response.data.slug })
+    .populate('favoritedBy')
+    .then(game => {
+      // add logic to handle missing favorited by next
+      if (game) {
+        res.render('games/show', { title: 'Game Details', user: req.user, game: response.data, favoritedBy: game.favoritedBy })
+      } else {
+        res.render('games/show' ,{ title: 'Game Details', user: req.user, game: response.data, favoritedBy: [""]})
+      }
+    })
   })
 }
