@@ -5,6 +5,8 @@ const reviewSchema = new Schema({
   reviewer: String,
   score: { type: Number, min: 1, max: 10 },
   review: String
+}, {
+  timestamps: true
 })
 
 const gameSchema = new Schema({
