@@ -18,8 +18,11 @@
       <div class="card-body">
         <h5 class="card-title"><%= game.name %> </h5>
         <p class="card-text">Released: <%= game.released %></p>
-        <p class="card-text">Platform: <%= game.platforms[0].platform.name %></p>
-        <p class="card-text">Metacritic Score: <%= game.metacritic %></p>
+        <p>Platforms:</p>
+        <% game.platforms.forEach(p => { %>
+          <p class="card-text"><%= p.platform.name %></p>
+        <% }) %>
+        <p class="card-text">Metacritic Score: <%= game.metacritic ? game.metacritic : 'N/A' %></p>
         <a href="#" class="btn btn-primary">Add to Collection</a>
       </div>
     </div>
