@@ -4,7 +4,28 @@ const Game = require('../models/game.js')
 module.exports = {
   new: newGame,
   search,
-  show
+  show,
+  addToCollection
+}
+
+function addToCollection(req, res) {
+  console.log(req.body)
+  req.body.favoritedBy = req.user._id
+  Game.findOne({ slug: req.body.slug })
+  .then(game => {
+    if (game.length != 0) {
+      console.log(game)
+      console.log(req.user._id)
+      game.favoritedBy.push(req.user._id)
+      game.save()
+      .then(() => {
+        res.redirect('/')
+      })
+    } else {
+      Game.create(req.body)
+      .then(res.redirect('/'))
+    }
+  })
 }
 
 function newGame(req, res) {
