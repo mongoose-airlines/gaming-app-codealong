@@ -1,6 +1,6 @@
 <%- include('../partials/header') %>
 <h3>Game Details Page</h3>
-<% if (game.clip) { %>
+<% if (game.clip != null) { %>
   <video width="480" height="320" controls="controls">
     <source src="<%= game.clip.clips.full %>" type="video/mp4">
     </video>
@@ -18,11 +18,15 @@
           <p><%= user.name %></p>
         <% }) %>
     <p class="card-text">Metacritic Score: <%= game.metacritic ? game.metacritic : 'N/A' %></p>
-    <form action="/games/<%= game.slug %>/collection" method="POST">
+    <% if (favoritedBy.some(u => {return u.email === user.email})) { %>
+      <form action="/games/<%= game.slug %>?_method=DELETE" method="POST">
+        <% } else { %>
+      <form action="/games/<%= game.slug %>/collection" method="POST">
+    <% } %>
       <input type="text" hidden name="title" value="<%= game.name %>">
       <input type="date" hidden name="released" value="<%= game.released %>">
       <input type="number" hidden name="metacriticScore" value="<%= game.metacritic %>">
-      <input type="text" hidden name="videoUrl" value="<%= game.clip.clips.full %>">
+      <input type="text" hidden name="videoUrl" value="<%= game.clip ? game.clip.clips.full : "" %>">
       <input type="text" hidden name="imageUrl" value="<%= game.background_image %>">
       <input type="number" hidden name="rawgId" value="<%= game.id %>">
       <input type="text" hidden name="slug" value="<%= game.slug %>">

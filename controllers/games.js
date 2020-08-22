@@ -5,7 +5,20 @@ module.exports = {
   new: newGame,
   search,
   show,
-  addToCollection
+  addToCollection,
+  removeFromCollection
+}
+
+function removeFromCollection(req, res) {
+  Game.findOne({ slug: req.params.slug })
+  .then(game => {
+    let idx = game.favoritedBy.indexOf(req.user._id)
+    game.favoritedBy.splice(idx, 1)
+    game.save()
+    .then(() => {
+      res.redirect(`/games/${req.params.slug}`)
+    })
+  })
 }
 
 function addToCollection(req, res) {
@@ -16,11 +29,11 @@ function addToCollection(req, res) {
       game.favoritedBy.push(req.user._id)
       game.save()
       .then(() => {
-        res.redirect('/')
+        res.redirect(`/games/${req.body.slug}`)
       })
     } else {
       Game.create(req.body)
-      .then(res.redirect('/'))
+      .then(res.redirect(`/games/${req.body.slug}`))
     }
   })
 }
@@ -43,7 +56,6 @@ function show(req, res) {
     Game.findOne({ slug: response.data.slug })
     .populate('favoritedBy')
     .then(game => {
-      // add logic to handle missing favorited by next
       if (game) {
         res.render('games/show', { title: 'Game Details', user: req.user, game: response.data, favoritedBy: game.favoritedBy })
       } else {
