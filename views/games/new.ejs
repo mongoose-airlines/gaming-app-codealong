@@ -1,0 +1,13 @@
+<%- include('../partials/header') %>
+
+<h3>New Game Page</h3>
+<form action="/games/search" method="POST">
+  <div class="form-row">
+    <div class="col-md-4">
+      <input type="text" class="form-control" name="query" placeholder="Search for game...">
+    </div>
+  </div>
+  <button type="button" class="btn btn-success">Search</button>
+</form>
+
+<%- include('../partials/footer') %>
