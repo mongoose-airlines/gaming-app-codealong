@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const passport = require('passport');
 const gamesCtrl = require('../controllers/games')
 
 router.get('/new', isLoggedIn, gamesCtrl.new)
