@@ -21,12 +21,6 @@
         </li>
         <% if (user) { %>
           <li class="nav-item">
-            <p>Logged in as <%=user.name%></p>
-          </li>
-          <li class="nav-item">
-            <img id="avatarPhoto" height="50" src="<%= user.avatar %>" alt="">
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="/games/new">Add Game</a>
           </li>
           <li class="nav-item">
@@ -37,6 +31,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/logout">Log Out</a>
+          </li>
+          <li class="nav-item">
+            <img id="avatarPhoto" height="50" src="<%= user.avatar %>" alt="">
           </li>
         <% } else { %>
           <li class="nav-item">

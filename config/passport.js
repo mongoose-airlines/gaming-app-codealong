@@ -17,6 +17,7 @@ passport.use(new GoogleStrategy({
             return cb(null, user);
           })
         }
+        return cb(null, user);
       } else {
         var newUser = new User({
           name: profile.displayName,

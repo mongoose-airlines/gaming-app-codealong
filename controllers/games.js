@@ -33,7 +33,7 @@ function addToCollection(req, res) {
   req.body.favoritedBy = req.user._id
   Game.findOne({ slug: req.body.slug })
   .then(game => {
-    if (game != null) {
+    if (game) {
       game.favoritedBy.push(req.user._id)
       game.save()
       .then(() => {
