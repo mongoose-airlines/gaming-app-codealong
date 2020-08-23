@@ -1,0 +1,56 @@
+<%- include('../partials/header') %>
+
+<h3>User Profile Page</h3>
+
+<div class="card" style="width: 36rem;">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="profileinfo-tab" data-toggle="tab" href="#profileinfo" role="tab" aria-controls="profileinfo" aria-selected="true">My Info</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="updateinfo-tab" data-toggle="tab" href="#updateinfo" role="tab" aria-controls="updateinfo" aria-selected="false">Update Info</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="friends-tab" data-toggle="tab" href="#friends" role="tab" aria-controls="friends" aria-selected="false">Friends</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="profileinfo" role="tabpanel" aria-labelledby="profileinfo-tab">
+        <div class="card-body">
+          <h5 class="card-title">Name: <%= user.name %></h5>
+          <p class="card-text">Alias: <%= user.alias %></p>
+          <p class="card-text">Email: <%= user.email %></p>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="updateinfo" role="tabpanel" aria-labelledby="updateinfo-tab">
+        <div class="card-body">
+            <form action="/users/profile?_method=PUT" method="POST">
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <label for="userAlias">Alias:</label>
+                        <input type="text" id="userAlias" class="form-control" name="alias" value="<%= user.alias %>">
+                    </div><br>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <label for="avatarUrl">Avatar Image URL:</label>
+                    <input type="text" id="avatarUrl" class="form-control" name="avatar" value="<%= user.avatar %>">
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-warning">Update</button>
+              </form>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="friends" role="tabpanel" aria-labelledby="friends-tab">
+        <div class="card-body">
+            <% user.friends.forEach(f => { %>
+                <a href="/users/<%= f._id %>"><%= f.name %></a><br>
+            <% }) %>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<%- include('../partials/footer') %>
+
