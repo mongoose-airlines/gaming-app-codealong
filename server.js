@@ -37,7 +37,6 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -52,5 +51,7 @@ app.use('/messages', messagesRouter);
 app.use(function(req, res) {
   res.status(404).send('Cant find that!');
 });
+
+
 
 module.exports = app;

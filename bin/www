@@ -8,6 +8,7 @@ var app = require('../server');
 var debug = require('debug')('sei-students:server');
 var http = require('http');
 
+
 /**
  * Get port from environment and store in Express.
  */
@@ -22,12 +23,25 @@ app.set('port', port);
 var server = http.createServer(app);
 
 /**
+ * Socket.io functionality
+ */
+const io = require('socket.io')(server)
+
+/**
  * Listen on provided port, on all network interfaces.
  */
 
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+io.on('connection', (socket) => {
+  console.log('New user connected!')
+
+  socket.on('new_message', (data) => {
+    io.sockets.emit('new_message', {message: data.message, username: data.username, avatar: data.avatar})
+  })
+})
 
 /**
  * Normalize a port into a number, string, or false.

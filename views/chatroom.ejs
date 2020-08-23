@@ -1,0 +1,10 @@
+<%- include('partials/header') %>
+<h3>Chat Room</h3>
+
+<input type="text" id="avatar" hidden name="avatar" value="<%= user.avatar %>">
+<input type="text" hidden name="username" value="<%= user.name %>" id="username">
+<input type="text" id="message">
+<a class="btn btn-info" href="#" id="send_message">Send Message</a>
+<div id="chatroom"></div>
+
+<%- include('partials/footer') %>

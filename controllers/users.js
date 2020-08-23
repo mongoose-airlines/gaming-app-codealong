@@ -7,7 +7,12 @@ module.exports = {
   addFriend,
   removeFriend,
   showProfile,
-  update
+  update,
+  chatRoom
+}
+
+function chatRoom(req, res) {
+  res.render('chatroom', { title: 'Chat Room', user: req.user })
 }
 
 function update(req, res) {
