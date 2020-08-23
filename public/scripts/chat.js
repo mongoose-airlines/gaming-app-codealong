@@ -1,4 +1,4 @@
-
+// Adjust this before deploying!!!
 let socket = io.connect('http://localhost:3000')
 
 let message = document.getElementById('message')
