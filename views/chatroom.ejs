@@ -7,4 +7,8 @@
 <a class="btn btn-info" href="#" id="send_message">Send Message</a>
 <div id="chatroom"></div>
 
+<% chats.forEach(chat => { %>
+  <p><img id="avatarPhoto" height="30" src="<%= chat.avatar %>" alt=""> <%= chat.username %>: <%= chat.message %></p>
+<% }) %>
+
 <%- include('partials/footer') %>

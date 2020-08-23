@@ -1,5 +1,6 @@
 const User = require('../models/user')
 const Game = require('../models/game')
+const Chat = require('../models/chat')
 
 module.exports = {
   index,
@@ -8,11 +9,24 @@ module.exports = {
   removeFriend,
   showProfile,
   update,
-  chatRoom
+  chatRoom,
+  postChat
+}
+
+function postChat(req, res) {
+  if (req.body.username === req.user.name) {
+    Chat.create(req.body)
+    .then(() => {res.status(201).send('Added')})
+  } else {
+    res.status(208).send('Already added')
+  }
 }
 
 function chatRoom(req, res) {
-  res.render('chatroom', { title: 'Chat Room', user: req.user })
+  Chat.find({})
+  .then(chats => {
+    res.render('chatroom', { title: 'Chat Room', user: req.user, chats: chats.reverse() })
+  })
 }
 
 function update(req, res) {
