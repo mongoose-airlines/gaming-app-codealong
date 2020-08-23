@@ -10,6 +10,7 @@ let chatters = document.getElementById('chatters')
 
 send_message.addEventListener('click', () => {
   socket.emit('new_message', { username: username.value, message: message.value, avatar: avatar.value})
+  message.value = ''
 })
 
 message.addEventListener('keypress', () => {
@@ -37,7 +38,6 @@ socket.on('typing', (data) => {
 })
 
 socket.on("new_message", (data) => {
-  message.value = ''
   isTyping.innerText = ''
   let newMessage = document.createElement('p')
   newMessage.innerHTML = `<p><img id="avatarPhoto" height="30" src="${data.avatar}" alt=""> ${data.username}: ${data.message}</p>`
