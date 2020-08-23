@@ -67,6 +67,7 @@ function show(req, res) {
       if (game) {
         res.render('games/show', { title: 'Game Details', user: req.user, game: response.data, favoritedBy: game.favoritedBy, gameId: game._id, reviews: game.reviews })
       } else {
+        // Is this really necessary?  
         res.render('games/show' ,{ title: 'Game Details', user: req.user, game: response.data, favoritedBy: [""], reviews: [""]})
       }
     })
