@@ -11,7 +11,7 @@
           <a class="nav-link active" id="gameinfo-tab" data-toggle="tab" href="#gameinfo" role="tab" aria-controls="gameinfo" aria-selected="true">Game Info</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="favorited-tab" data-toggle="tab" href="#favorited" role="tab" aria-controls="favorited" aria-selected="false">Liked By</a>
+          <a class="nav-link" id="favorited-tab" data-toggle="tab" href="#favorited" role="tab" aria-controls="favorited" aria-selected="false">Owned By</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews</a>
@@ -32,7 +32,7 @@
         </div>
         <div class="tab-pane fade" id="favorited" role="tabpanel" aria-labelledby="favorited-tab">
           <div class="card-body">
-            <p>Favorited By:</p>
+            <p>Owned By:</p>
             <% favoritedBy.forEach(user => { %>
               <p><img id="avatarPhoto" width="30" src="<%= user.avatar %>" alt=""> <%= user.name %></p>
             <% }) %>

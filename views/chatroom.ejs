@@ -1,6 +1,7 @@
 <%- include('partials/header') %>
 <h3>Live Chat Room</h3>
-
+<p>Users in the room:</p>
+<ul id="chatters"></ul>
 <input type="text" id="avatar" hidden name="avatar" value="<%= user.avatar %>">
 <input type="text" hidden name="username" value="<%= user.name %>" id="username">
 <input type="text" id="message">
@@ -11,4 +12,5 @@
   <p><img id="avatarPhoto" height="30" src="<%= chat.avatar %>" alt=""> <%= chat.username %>: <%= chat.message %></p>
 <% }) %>
 
+<script src="/scripts/chat.js"></script>
 <%- include('partials/footer') %>

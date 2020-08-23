@@ -10,7 +10,12 @@ module.exports = {
   showProfile,
   update,
   chatRoom,
-  postChat
+  postChat,
+  getName
+}
+
+function getName(req, res) {
+  res.json(req.user.name)
 }
 
 function postChat(req, res) {
