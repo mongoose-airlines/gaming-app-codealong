@@ -9,8 +9,8 @@ router.get('/:id/unfriend', isLoggedIn, usersCtrl.removeFriend);
 router.put('/profile', isLoggedIn, usersCtrl.update)
 
 function isLoggedIn(req, res, next) {
-    if ( req.isAuthenticated() ) return next();
-    res.redirect('/auth/google');
-  }
+  if ( req.isAuthenticated() ) return next();
+  res.redirect('/auth/google');
+}
 
 module.exports = router;
