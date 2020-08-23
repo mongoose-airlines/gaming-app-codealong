@@ -31,9 +31,32 @@
       <input type="number" hidden name="rawgId" value="<%= game.id %>">
       <input type="text" hidden name="slug" value="<%= game.slug %>">
       <button class="btn btn-warning"><%= favoritedBy.some(u => {return u.email === user.email}) ? "Remove from Collection" : "Add to Collection" %></button>
-      
     </form>
   </div>
 </div>
+<% if (favoritedBy.some(u => {return u.email === user.email})) { %>
+  <form action="/games/<%= gameId %>/reviews" method="POST">
+    <div class="form-group">
+      <textarea class="form-control" name="content" style="width: 18rem;" id="exampleFormControlTextarea1" placeholder="Leave a Review" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Rating</label>
+      <select style="width: 18rem;" class="form-control" name="rating" id="exampleFormControlSelect1">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+      </select>
+    </div>
+    <input type="text" hidden name="reviewer" value="<%= user.name %>">
+    <button class="btn btn-info">Submit</button>
+  </form>
+<% } %> 
 
 <%- include('../partials/footer') %>

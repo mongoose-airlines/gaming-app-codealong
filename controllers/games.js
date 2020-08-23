@@ -65,7 +65,7 @@ function show(req, res) {
     .populate('favoritedBy')
     .then(game => {
       if (game) {
-        res.render('games/show', { title: 'Game Details', user: req.user, game: response.data, favoritedBy: game.favoritedBy })
+        res.render('games/show', { title: 'Game Details', user: req.user, game: response.data, favoritedBy: game.favoritedBy, gameId: game._id })
       } else {
         res.render('games/show' ,{ title: 'Game Details', user: req.user, game: response.data, favoritedBy: [""]})
       }
