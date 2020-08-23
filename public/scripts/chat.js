@@ -1,17 +1,18 @@
-$(function() {
+
   let socket = io.connect('http://localhost:3000')
 
-  let message = $("#message")
-  let username = $("#username")
-  let send_message = $("#send_message")
-  let chatroom = $("#chatroom")
-  let avatar = $("#avatar")
+  let message = document.getElementById('message')
+  let username = document.getElementById('username')
+  let send_message = document.getElementById('send_message')
+  let chatroom = document.getElementById('chatroom')
+  let avatar = document.getElementById('avatar')
 
-  send_message.click(() => {
-    socket.emit('new_message', { username: username.val(), message: message.val(), avatar: avatar.val()})
+  send_message.addEventListener('click', () => {
+    socket.emit('new_message', { username: username.value, message: message.value, avatar: avatar.value})
   })
 
   socket.on("new_message", (data) => {
-    chatroom.append(`<p><img id="avatarPhoto" height="30" src="${data.avatar}" alt=""> ${data.username}: ${data.message}</p>`)
+    let newMessage = document.createElement('p')
+    newMessage.innerHTML = `<p><img id="avatarPhoto" height="30" src="${data.avatar}" alt=""> ${data.username}: ${data.message}</p>`
+    chatroom.appendChild(newMessage)
   })
-})
