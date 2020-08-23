@@ -23,9 +23,9 @@ function postChat(req, res) {
 }
 
 function chatRoom(req, res) {
-  Chat.find({})
+  Chat.find({}).sort({_id: -1}).limit(150)
   .then(chats => {
-    res.render('chatroom', { title: 'Chat Room', user: req.user, chats: chats.reverse() })
+    res.render('chatroom', { title: 'Chat Room', user: req.user, chats: chats })
   })
 }
 

@@ -5,8 +5,8 @@
 <input type="text" hidden name="username" value="<%= user.name %>" id="username">
 <input type="text" id="message">
 <a class="btn btn-info" href="#" id="send_message">Send Message</a>
+<p id="isTyping"></p>
 <div id="chatroom"></div>
-
 <% chats.forEach(chat => { %>
   <p><img id="avatarPhoto" height="30" src="<%= chat.avatar %>" alt=""> <%= chat.username %>: <%= chat.message %></p>
 <% }) %>
