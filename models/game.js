@@ -3,7 +3,8 @@ const Schema = mongoose.Schema
 
 const reviewSchema = new Schema({
   reviewer: String,
-  score: { type: Number, min: 1, max: 10 },
+  reviewerPhoto: String,
+  rating: { type: Number, min: 1, max: 10 },
   content: String
 }, {
   timestamps: true
