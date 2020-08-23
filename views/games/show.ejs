@@ -34,7 +34,7 @@
     </form>
   </div>
 </div>
-<% if (favoritedBy.some(u => {return u.email === user.email})) { %>
+<% if (!reviews.some(u => {return u.reviewer === user.name}) && favoritedBy.some(u => {return u.email === user.email})) { %>
   <form action="/games/<%= gameId %>/reviews" method="POST">
     <div class="form-group">
       <textarea class="form-control" name="content" style="width: 18rem;" id="exampleFormControlTextarea1" placeholder="Leave a Review" rows="3"></textarea>
