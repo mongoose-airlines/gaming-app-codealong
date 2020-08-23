@@ -3,10 +3,11 @@ const Schema = mongoose.Schema
 
 const userSchema = new Schema({
   name: String,
+  alias: String,
   email: String,
   avatar: String,
   googleId: String,
-  gameCollection: [{ type: Schema.Types.ObjectId, ref: 'Game' }]
+  friends: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 }, {
   timestamps: true
 });

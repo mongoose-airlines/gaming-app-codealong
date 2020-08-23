@@ -3,7 +3,26 @@ const Game = require('../models/game')
 
 module.exports = {
   index,
-  show
+  show,
+  addFriend,
+  removeFriend
+}
+
+function removeFriend(req, res) {
+  let idx = req.user.friends.indexOf(req.params.id)
+  req.user.friends.splice(idx, 1)
+  req.user.save()
+  .then(() => {
+    res.redirect(`/users/${req.params.id}`)
+  })
+}
+
+function addFriend(req, res) {
+  req.user.friends.push(req.params.id)
+  req.user.save()
+  .then(() => {
+    res.redirect(`/users/${req.params.id}`)
+  })
 }
 
 function index(req, res) {

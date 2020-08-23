@@ -15,7 +15,12 @@
       <a href="/games/<%= game.slug %>"><%= game.title %></a><br>
     <% }) %><br>
     <!-- Time-permitting, implement friend feature -->
-    <!-- <a href="#" class="btn btn-primary">Add Friend</a> -->
+    <% if (!userInfo._id.equals(user._id) && !user.friends.includes(userInfo._id)) { %>
+      <a href="/users/<%= userInfo._id %>/friend" class="btn btn-primary">Add Friend</a>
+    <% } %>
+    <% if (!userInfo._id.equals(user._id) && user.friends.includes(userInfo._id)) { %>
+      <a href="/users/<%= userInfo._id %>/unfriend" class="btn btn-primary">Remove Friend</a>
+    <% } %>
   </div>
 </div>
 

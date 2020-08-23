@@ -3,6 +3,8 @@ const usersCtrl = require('../controllers/users');
 
 router.get('/', isLoggedIn, usersCtrl.index);
 router.get('/:id', isLoggedIn, usersCtrl.show);
+router.get('/:id/friend', isLoggedIn, usersCtrl.addFriend)
+router.get('/:id/unfriend', isLoggedIn, usersCtrl.removeFriend)
 
 
 function isLoggedIn(req, res, next) {
