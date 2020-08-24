@@ -14,7 +14,7 @@ send_message.addEventListener('click', () => {
   message.value = ''
 })
 
-send_message.addEventListener('keypress', (e) => {
+message.addEventListener('keypress', (e) => {
   if (e.key === 'Enter'){
     socket.emit('new_message', { username: username.value, message: message.value, avatar: avatar.value})
     message.value = ''
