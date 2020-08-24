@@ -26,7 +26,6 @@ var server = http.createServer(app);
  * Socket.io functionality
  */
 const io = require('socket.io')(server)
-
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -37,6 +36,7 @@ server.on('listening', onListening);
 
 let chatters = {}
 
+
 io.on('connection', (socket) => {
   
   console.log('New user connected!')
@@ -44,10 +44,12 @@ io.on('connection', (socket) => {
   socket.on('register-user', (username) => {
     chatters[socket.id] = username;
     io.emit('update-chatter-list', Object.keys(chatters).map(id => chatters[id]));
+    io.emit('user-enter')
   });
 
   socket.on('disconnect', () => {
     delete chatters[socket.id];
+    io.emit('user-exit')
     io.emit('update-chatter-list', Object.keys(chatters).map(id => chatters[id]));
   });
 

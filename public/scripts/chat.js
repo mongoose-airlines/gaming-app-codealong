@@ -1,3 +1,4 @@
+
 let socket = io()
 
 let message = document.getElementById('message')
@@ -33,12 +34,21 @@ function getUserName() {
 
 getUserName()
 
+socket.on('user-enter', () => {
+  enterAudio.play()
+})
+
+socket.on('user-exit', () => {
+  exitAudio.play()
+})
+
 socket.on('typing', (data) => {
   isTyping.innerText = `${data.username} is typing...`
 })
 
 socket.on("new_message", (data) => {
   isTyping.innerText = ''
+  messageAudio.play()
   let newMessage = document.createElement('p')
   newMessage.innerHTML = `<p><img id="avatarPhoto" height="30" src="${data.avatar}" alt=""> ${data.username}: ${data.message}</p>`
   chatroom.prepend(newMessage)
