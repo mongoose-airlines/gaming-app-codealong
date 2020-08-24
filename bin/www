@@ -5,7 +5,7 @@
  */
 
 var app = require('../server');
-var debug = require('debug')('sei-students:server');
+var debug = require('debug')('gaming-app-codealong:server');
 var http = require('http');
 
 
@@ -23,41 +23,15 @@ app.set('port', port);
 var server = http.createServer(app);
 
 /**
- * Socket.io functionality
- */
-const io = require('socket.io')(server)
-/**
  * Listen on provided port, on all network interfaces.
  */
+const io = require('../io')
+io.attach(server)
+
 
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-
-let chatters = {}
-
-io.on('connection', (socket) => {
-  
-  socket.on('register-user', (username) => {
-    chatters[socket.id] = username;
-    io.emit('update-chatter-list', Object.keys(chatters).map(id => chatters[id]));
-    io.emit('user-enter')
-  });
-
-  socket.on('disconnect', () => {
-    delete chatters[socket.id];
-    io.emit('user-exit')
-    io.emit('update-chatter-list', Object.keys(chatters).map(id => chatters[id]));
-  });
-
-  socket.on('new_message', (data) => {
-    io.sockets.emit('new_message', {message: data.message, username: data.username, avatar: data.avatar})
-  })
-
-  socket.on('typing', (data) => {
-    socket.broadcast.emit('typing', {username: data.username})
-  })
-})
 
 /**
  * Normalize a port into a number, string, or false.
