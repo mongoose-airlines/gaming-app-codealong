@@ -10,7 +10,7 @@
 <p id="isTyping"></p>
 <div id="chatroom"></div>
 <% chats.forEach(chat => { %>
-  <p><img id="avatarPhoto" height="30" src="<%= chat.avatar %>" alt=""> <%= chat.username %>: <%= chat.message %></p>
+  <p><img id="avatarPhoto" height="30" src="<%= chat.avatar %>" alt=""> <%= chat.username %>: <%= chat.message %> - (<%= chat.createdAt.toLocaleString() %>)</p>
 <% }) %>
 
 <script src="/scripts/chat.js"></script>
