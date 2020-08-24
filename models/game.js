@@ -19,7 +19,6 @@ const gameSchema = new Schema(
     slug: String,
     rawgId: Number,
     released: Date,
-    platform: String,
     imageUrl: String,
     videoUrl: String,
     metacriticScore: Number,
