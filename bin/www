@@ -36,11 +36,8 @@ server.on('listening', onListening);
 
 let chatters = {}
 
-
 io.on('connection', (socket) => {
   
-  console.log('New user connected!')
-
   socket.on('register-user', (username) => {
     chatters[socket.id] = username;
     io.emit('update-chatter-list', Object.keys(chatters).map(id => chatters[id]));

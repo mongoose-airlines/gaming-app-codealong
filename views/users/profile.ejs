@@ -58,7 +58,7 @@
             <% }) %> 
         </div>
       </div>
-      <div class="tab-pane fade show active" id="watchlist" role="tabpanel" aria-labelledby="watchlist-tab">
+      <div class="tab-pane fade show" id="watchlist" role="tabpanel" aria-labelledby="watchlist-tab">
         <div class="card-body">
           <% user.watchList.forEach(g => { %>
             <a href="/games/<%= g.slug %>"><p><%= g.title %></p></a>
