@@ -7,7 +7,26 @@ module.exports = {
   show,
   addToCollection,
   removeFromCollection,
-  index
+  index,
+  addToWatchList,
+  removeFromWatchList
+}
+
+function removeFromWatchList(req, res) {
+  let idx = req.user.watchList.findIndex(g => g.slug === req.params.slug)
+  req.user.watchList.splice(idx, 1)
+  req.user.save()
+  .then(() => {
+    res.redirect(`/games/${req.body.slug}`)
+  })
+}
+
+function addToWatchList(req, res) {
+  req.user.watchList.push(req.body)
+  req.user.save()
+  .then(() => {
+    res.redirect(`/games/${req.body.slug}`)
+  })
 }
 
 function index(req, res) {

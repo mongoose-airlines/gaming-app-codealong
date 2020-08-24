@@ -5,6 +5,8 @@ router.get('/new', isLoggedIn, gamesCtrl.new)
 router.post('/search', isLoggedIn, gamesCtrl.search)
 router.get('/:title', isLoggedIn, gamesCtrl.show)
 router.post('/:slug/collection', isLoggedIn, gamesCtrl.addToCollection)
+router.post('/:slug/watch', isLoggedIn, gamesCtrl.addToWatchList)
+router.delete('/:slug/watch', isLoggedIn, gamesCtrl.removeFromWatchList)
 router.delete('/:slug', isLoggedIn, gamesCtrl.removeFromCollection)
 router.get('/', isLoggedIn, gamesCtrl.index)
 

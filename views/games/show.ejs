@@ -88,6 +88,16 @@
       <input type="text" hidden name="slug" value="<%= game.slug %>">
       <button class="btn btn-warning"><%= favoritedBy.some(u => {return u.email === user.email}) ? "Remove from Collection" : "Add to Collection" %></button>
     </form>
+    <% if (user.watchList.some(g => {return g.slug === game.slug})) { %>
+      <form action="/games/<%= game.slug %>/watch?_method=DELETE" method="POST">
+    <% } else { %>
+      <form action="/games/<%= game.slug %>/watch" method="POST">
+    <% } %>
+      <input type="text" hidden name="title" value="<%= game.name %>">
+      <input type="text" hidden name="slug" value="<%= game.slug %>">
+      <input type="date" hidden name="released" value="<%= game.released %>">
+      <button class="btn btn-success"><%= user.watchList.some(g => {return g.slug === game.slug}) ? "Unwatch" : "Watch" %></button>
+    </form>
  
 
 <%- include('../partials/footer') %>
