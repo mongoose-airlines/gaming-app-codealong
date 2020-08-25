@@ -22,6 +22,7 @@ const gamesRouter = require("./routes/games");
 const reviewsRouter = require("./routes/reviews");
 const usersRouter = require("./routes/users");
 const messagesRouter = require("./routes/messages");
+const authRouter = require("./routes/auth")
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -48,6 +49,7 @@ app.use("/games", gamesRouter);
 app.use("/", reviewsRouter);
 app.use("/users", usersRouter);
 app.use("/messages", messagesRouter);
+app.use("/auth", authRouter)
 
 // invalid request, send 404 page
 app.use(function (req, res) {
