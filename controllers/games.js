@@ -99,7 +99,6 @@ function show(req, res) {
               reviews: game.reviews,
             });
           } else {
-            // Is this really necessary?
             res.render("games/show", {
               title: "Game Details",
               user: req.user,

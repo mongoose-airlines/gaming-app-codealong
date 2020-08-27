@@ -65,13 +65,5 @@ socket.on("new_message", (data) => {
   let newMessage = document.createElement("p");
   newMessage.innerHTML = `<p><img id="avatarPhoto" height="30" src="${data.avatar}" alt=""> ${data.username}: ${data.message}</p>`;
   chatroom.prepend(newMessage);
-  fetch("/users/chatroom", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      avatar: data.avatar,
-      username: data.username,
-      message: data.message,
-    }),
-  });
+  
 });
